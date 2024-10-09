@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="{% static 'css/register.css' %}">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div>
+			<h1> بودجه </h1>
+		</div>
+		<div id="income">
+			<h2> درآمد </h2> 
+			{% for income in incomes %}
+				<div class="card">
+					<h3> {{ income.text }} <h3>
+					<h5> {{ income.amount }} تومان {{ income.date }} <h5>
+					<h5> {{ income.description }} </h5>
+				</div>
+			{% endfor %}
+			<form action="/submit/income/" method="POST">
+				<h2> درآمد جدید </h2>
+				{% csrf_token %}
+				{{ form }}
+				<input type="submit" value="ثبت">
+			</form>	
+		</div>
+		<div id="expense">
+			<h2> هزینه </h2>
+				{% for expense in expenses %}
+					<div class="card">
+						<h3> {{ expense.text }} <h3>
+						<h5> {{ expense.amount }} تومان {{ expense.date }} <h5>
+						<h5> {{ expense.description }} </h5>
+					</div>
+				{% endfor %}
+			<form action="/submit/expense/" method="POST">
+				<h2> هزینه جدید </h2>
+				{% csrf_token %}
+				{{ form }}
+				<input type="submit" value="ثبت">
+			</form>	
+		</div>
+	</body>
+</html>
