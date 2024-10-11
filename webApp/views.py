@@ -40,12 +40,30 @@ def submit_income(request):
 
 def view_budget(request):
     form = Budget(request.POST)
-    incomes = Income.objects.all()
-    expenses = Expense.objects.all()
+    incomes = Income.objects.order_by('-date')[:3]
+    expenses = Expense.objects.order_by('-date')[:3]
     template = loader.get_template('register.html')
     context = {
         'incomes': incomes,
         'expenses': expenses,
         'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def all_incomes(request):
+    incomes = Income.objects.order_by('-date')
+    template = loader.get_template('viewAll.html')
+    context = {
+        'transactions': incomes,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def all_expenses(request):
+    expenses = Expense.objects.order_by('-date')
+    template = loader.get_template('viewAll.html')
+    context = {
+        'transactions': expenses,
     }
     return HttpResponse(template.render(context, request))

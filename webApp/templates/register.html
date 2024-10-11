@@ -22,6 +22,7 @@
 					<h5> {{ income.description }} </h5>
 				</div>
 			{% endfor %}
+			<a href="/incomes/all/"><button action="/expenses/all/" method="GET">تمام درآمد ها</button></a>
 			<form action="/submit/income/" method="POST">
 				<h2> درآمد جدید </h2>
 				{% csrf_token %}
@@ -38,6 +39,7 @@
 						<h5> {{ expense.description }} </h5>
 					</div>
 				{% endfor %}
+			<a href="/expenses/all/"><button method="GET">تمام هزینه ها</button></a>
 			<form action="/submit/expense/" method="POST">
 				<h2> هزینه جدید </h2>
 				{% csrf_token %}
